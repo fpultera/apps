@@ -1,4 +1,5 @@
 resources:
   - secrets-apps.yaml
+  - secrets-apps_test.yaml
   - secretos.yaml
 
