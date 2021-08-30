@@ -27,6 +27,7 @@ spec:
             type: object
           spec:
             type: object
+            x-kubernetes-map-type: atomic
             x-kubernetes-preserve-unknown-fields: true
         required:
         - metadata
@@ -63,9 +64,11 @@ spec:
             type: object
           spec:
             type: object
+            x-kubernetes-map-type: atomic
             x-kubernetes-preserve-unknown-fields: true
           status:
             type: object
+            x-kubernetes-map-type: atomic
             x-kubernetes-preserve-unknown-fields: true
         required:
         - metadata
@@ -101,6 +104,7 @@ spec:
             type: object
           spec:
             type: object
+            x-kubernetes-map-type: atomic
             x-kubernetes-preserve-unknown-fields: true
         required:
         - metadata
@@ -146,9 +150,11 @@ spec:
             type: object
           spec:
             type: object
+            x-kubernetes-map-type: atomic
             x-kubernetes-preserve-unknown-fields: true
           status:
             type: object
+            x-kubernetes-map-type: atomic
             x-kubernetes-preserve-unknown-fields: true
         required:
         - metadata
@@ -157,6 +163,46 @@ spec:
     served: true
     storage: true
     subresources: {}
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: workflowtasksets.argoproj.io
+spec:
+  group: argoproj.io
+  names:
+    kind: WorkflowTaskSet
+    listKind: WorkflowTaskSetList
+    plural: workflowtasksets
+    shortNames:
+    - wfts
+    singular: workflowtaskset
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        properties:
+          apiVersion:
+            type: string
+          kind:
+            type: string
+          metadata:
+            type: object
+          spec:
+            type: object
+            x-kubernetes-map-type: atomic
+            x-kubernetes-preserve-unknown-fields: true
+          status:
+            type: object
+            x-kubernetes-map-type: atomic
+            x-kubernetes-preserve-unknown-fields: true
+        required:
+        - metadata
+        - spec
+        type: object
+    served: true
+    storage: true
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -185,6 +231,7 @@ spec:
             type: object
           spec:
             type: object
+            x-kubernetes-map-type: atomic
             x-kubernetes-preserve-unknown-fields: true
         required:
         - metadata
@@ -243,6 +290,8 @@ rules:
   - cronworkflows/finalizers
   - clusterworkflowtemplates
   - clusterworkflowtemplates/finalizers
+  - workflowtasksets
+  - workflowtasksets/finalizers
   verbs:
   - create
   - delete
@@ -346,7 +395,9 @@ rules:
   - argoproj.io
   resources:
   - workflows
-  - workflows/finalizers
+  - workflows/finalizersfinalizersz
+  - workflowtasksets
+  - workflowtasksets/finalizers
   verbs:
   - get
   - list
@@ -524,6 +575,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  labels:
+    app: workflow-controller
   name: workflow-controller-metrics
 spec:
   ports:
@@ -550,7 +603,7 @@ spec:
       containers:
       - args:
         - server
-        image: argoproj/argocli:v3.0.10
+        image: quay.io/argoproj/argocli:latest
         name: argo-server
         ports:
         - containerPort: 2746
@@ -596,7 +649,7 @@ spec:
         - --configmap
         - workflow-controller-configmap
         - --executor-image
-        - argoproj/argoexec:v3.0.10
+        - quay.io/argoproj/argoexec:latest
         command:
         - workflow-controller
         env:
@@ -605,7 +658,7 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: metadata.name
-        image: argoproj/workflow-controller:v3.0.10
+        image: quay.io/argoproj/workflow-controller:latest
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -620,9 +673,12 @@ spec:
           name: metrics
         - containerPort: 6060
         securityContext:
+          allowPrivilegeEscalation: false
           capabilities:
             drop:
             - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
       nodeSelector:
         kubernetes.io/os: linux
       securityContext:
