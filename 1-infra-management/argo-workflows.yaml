@@ -7,10 +7,6 @@ spec:
   project: default
   source:
     repoURL: https://argoproj.github.io/argo-helm
-<<<<<<< HEAD
-=======
-    targetRevision: HEAD
->>>>>>> 488e97e1d374b35df6b190ffcd300ff6844c35ae
     chart: argo-workflows
   destination:
     server: https://kubernetes.default.svc
