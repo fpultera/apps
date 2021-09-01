@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mongo-dev
+  namespace: argocd
+spec:
+  project: munditrade-multienv
+  source:
+    repoURL: 'https://charts.bitnami.com/bitnami'
+    targetRevision: 10.23.13
+    chart: mongodb
+    helm:
+      parameters:
+        - name: service.type
+          value: ClusterIP
+        - name: auth.username
+          value: admin
+        - name: auth.enabled
+          value: "true"
+        - name: auth.password
+          value: "asda123sdff"
+        - name: auth.database
+          value: first
+
+  destination:
+    server: 'https://34.68.213.30'
+    namespace: mongo-dev
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+  
