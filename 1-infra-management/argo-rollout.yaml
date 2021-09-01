@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argo-rollout
+  name: argo-rollouts
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://argoproj.github.io/argo-helm
     targetRevision: 2.0.1
-    chart: argo-rollout
+    chart: argo-rollouts
   destination:
     server: https://kubernetes.default.svc
-    namespace: argo-rollout
+    namespace: argo-rollouts
   syncPolicy:
     automated:
       prune: true
