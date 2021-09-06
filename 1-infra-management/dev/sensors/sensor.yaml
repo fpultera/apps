@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Sensor
+metadata:
+  name: workflow
+  namespace: argo-events
+  finalizers:
+    - sensor-controller
+spec:
+  template:
+    serviceAccountName: operate-workflow-sa
+  dependencies:
+    - name: http-post-trigger
+      eventSourceName: webhook
+      eventName: example
+  triggers:
+    # https://github.com/argoproj/argo-events/blob/master/api/sensor.md#triggertemplate
+    - template:
+        name: workflow-trigger-1
+        argoWorkflow:
+          # https://github.com/argoproj/argo-events/blob/master/api/sensor.md#argoproj.io/v1alpha1.ArgoWorkflowTrigger
+          group: argoproj.io
+          version: v1alpha1
+          resource: Workflow
+          operation: submit
+          metadata:
+            generateName: cluster-workflow-template-hello-world-
+          source:
+            resource:
+              apiVersion: argoproj.io/v1alpha1
+              kind: Workflow
+              metadata:
+                name: special-trigger
+              spec:
+                serviceAccountName: operate-workflow-sa
+                entrypoint: whalesay-template
+                workflowTemplateRef:
+                  name: whalesay-template
+                  clusterScope: true
