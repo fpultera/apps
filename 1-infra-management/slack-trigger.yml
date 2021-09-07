@@ -8,14 +8,14 @@ spec:
     serviceAccountName: operate-workflow-sa
   dependencies:
     - name: test-dep
-      eventSourceName: webhook
+      eventSourceName: webhook-slack
       eventName: example
   triggers:
     - template:
         name: slack-trigger
         slack:
-          channel: general
-          message: hello world
+          channel: slack-test
+          message: Mira este Mensaje
           slackToken:
             key: token
             name: slack-secret
