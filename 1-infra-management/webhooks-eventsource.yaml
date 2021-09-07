@@ -14,7 +14,3 @@ spec:
       method: POST
       port: "12000"
       url: ""
-    example2:
-      endpoint: /example
-      method: POST
-      port: "12000"
