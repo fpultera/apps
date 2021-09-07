@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argo-events-config
+  name: slack-app
   namespace: argocd
 spec:
   project: default
