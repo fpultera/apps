@@ -2,10 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
   name: webhook
-  namespace: argo-events
 spec:
-  template:
-    serviceAccountName: operate-workflow-sa
   dependencies:
     - name: test-dep
       eventSourceName: webhook
@@ -15,7 +12,7 @@ spec:
         name: slack-trigger
         slack:
           channel: general
-          message: Mira este Mensaje
+          message: hello world
           slackToken:
             key: token
             name: slack-secret
