@@ -12,4 +12,4 @@ spec:
         - path: /example
           backend:
             serviceName: webhook-eventsource-svc
-            servicePort: 12001
+            servicePort: 12000
