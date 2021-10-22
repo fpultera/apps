@@ -13,10 +13,10 @@ spec:
       values: |
         injector:
           authPath: "auth/kubernetes"
-        server:
-          affinity: ""
-          ha:
-            enabled: true
+        # server:
+        #   affinity: ""
+        #   ha:
+        #     enabled: true
   destination:
     server: https://kubernetes.default.svc
     namespace: vault
