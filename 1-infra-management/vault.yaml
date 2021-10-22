@@ -12,7 +12,7 @@ spec:
     helm:
       values: |
         injector:
-          authPath: "auth/kubernetes
+          authPath: "auth/kubernetes"
         server:
           affinity: ""
           ha:
