@@ -16,10 +16,10 @@ spec:
         server:
           standalone:
             config:
-                }
-                storage "file" {
-                  path = "/vault/data"
-                }
+              }
+              storage "file" {
+                path = "/vault/data"
+              }
         # server:
         #   affinity: ""
         #   ha:
