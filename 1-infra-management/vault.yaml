@@ -15,7 +15,7 @@ spec:
           authPath: "auth/gcp"
         server:
           standalone:
-            config:
+            config: |
               }
               storage "file" {
                 path = "/vault/data"
