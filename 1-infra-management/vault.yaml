@@ -12,7 +12,14 @@ spec:
     helm:
       values: |
         injector:
-          authPath: "auth/kubernetes"
+          authPath: "auth/gcp"
+        server:
+          standalone:
+            config:
+                }
+                storage "file" {
+                  path = "/vault/data"
+                }
         # server:
         #   affinity: ""
         #   ha:
