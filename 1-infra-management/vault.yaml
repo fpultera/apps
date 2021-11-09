@@ -9,22 +9,21 @@ spec:
     repoURL: https://helm.releases.hashicorp.com
     targetRevision:  0.5.0
     chart: vault
-    # helm:
-    #   values: |
-    #     injector:
-    #       authPath: "auth/gcp"
-    #     server:
-    #       standalone:
-    #         config: |
-    #           ui = true
-    #           listener "tcp" {
-    #             tls_disable = 1
-    #             address = "[::]:8200"
-    #             cluster_address = "[::]:8201"
-    #           }
-    #           storage "file" {
-    #             path = "/vault/data"
-    #           }
+    helm:
+      values: |
+        server:
+          standalone:
+            enable: "-"
+            config: |
+              ui = true
+              listener "tcp" {
+                tls_disable = 1
+                address = "[::]:8200"
+                cluster_address = "[::]:8201"
+              }
+              storage "file" {
+                path = "/vault/data"
+              }
         # server:
         #   affinity: ""
         #   ha:
