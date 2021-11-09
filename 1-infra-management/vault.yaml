@@ -37,7 +37,7 @@ spec:
               # }
               storage "gcs" {
                 bucket = "backup-vault-storage"
-                credentials_file = /vault/sa/key.json
+                credentials_file = "/vault/sa/key.json"
               }
         # server:
         #   affinity: ""
