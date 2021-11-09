@@ -11,10 +11,10 @@ spec:
     chart: vault
     helm:
       values: |
-        extraEnvironmentVars:
-          GOOGLE_REGION: global
-          GOOGLE_PROJECT: myproject
-          GOOGLE_APPLICATION_CREDENTIALS: /vault/userconfig/myproject/myproject-creds.json
+        extraVolumes:
+          - type: secret
+            name: gcp-secret
+            path: null
         server:
           standalone:
             enable: "-"
@@ -30,7 +30,7 @@ spec:
               # }
               storage "gcs" {
                 bucket = "backup-vault-storage"
-                credentials_file = "/vault/sa/key.json"
+                credentials = "/vault/userconfig/gcp-secret/quiet-era-330215-ac88592a8022.json"
               }
         # server:
         #   affinity: ""
