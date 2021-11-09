@@ -11,6 +11,17 @@ spec:
     chart: vault
     helm:
       values: |
+        extraEnv:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /vault/sa/key.json
+        extraVolumes:
+        - name: vault-gcs-sa
+          secret:
+            secretName: gcp-secret
+        extraVolumeMounts:
+        - name: vault-gcs-sa
+          mountPath: /vault/sa
+          readOnly: true
         server:
           standalone:
             enable: "-"
@@ -26,6 +37,7 @@ spec:
               # }
               storage "gcs" {
                 bucket = "backup-vault-storage"
+                credentials_file = /vault/sa/key.json
               }
         # server:
         #   affinity: ""
