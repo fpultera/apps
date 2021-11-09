@@ -28,12 +28,12 @@ spec:
                 address = "[::]:8200"
                 cluster_address = "[::]:8201"
               }
-              storage "file" {
-                path = "/vault/data"
-              }
-              # storage "gcs" {
-              #   bucket = "backup-vault-storage"
+              # storage "file" {
+              #   path = "/vault/data"
               # }
+              storage "gcs" {
+                bucket = "backup-vault-storage"
+              }
         # server:
         #   affinity: ""
         #   ha:
