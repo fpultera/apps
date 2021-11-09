@@ -16,7 +16,6 @@ spec:
         server:
           standalone:
             config: |
-              ui=true
               storage "file" {
                 path = "/vault/data"
               }
