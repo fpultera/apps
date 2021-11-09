@@ -5,23 +5,23 @@ metadata:
   namespace: argocd
 spec:
   project: default
+  extraEnv:
+  - name: GOOGLE_APPLICATION_CREDENTIALS
+    value: /vault/sa/key.json
+  extraVolumes:
+  - name: vault-gcs-sa
+    secret:
+      secretName: gcp-secret
+  extraVolumeMounts:
+  - name: vault-gcs-sa
+    mountPath: /vault/sa
+    readOnly: true
   source:
     repoURL: https://helm.releases.hashicorp.com
     targetRevision:  0.5.0
     chart: vault
     helm:
       values: |
-        extraEnv:
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: /vault/sa/key.json
-        extraVolumes:
-        - name: vault-gcs-sa
-          secret:
-            secretName: gcp-secret
-        extraVolumeMounts:
-        - name: vault-gcs-sa
-          mountPath: /vault/sa
-          readOnly: true
         server:
           standalone:
             enable: "-"
