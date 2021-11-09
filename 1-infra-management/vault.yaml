@@ -11,11 +11,11 @@ spec:
     chart: vault
     helm:
       values: |
-        extraVolumes:
-          - type: secret
-            name: gcp-secret
-            path: null
         server:
+          extraVolumes:
+            - type: secret
+              name: gcp-secret
+              path: null
           standalone:
             enable: "-"
             config: |
