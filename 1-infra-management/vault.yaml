@@ -11,17 +11,10 @@ spec:
     chart: vault
     helm:
       values: |
-        extraEnv:
-          - name: GOOGLE_APPLICATION_CREDENTIALS
-            value: /vault/sa/key.json
-        extraVolumes:
-          - name: vault-gcs-sa
-            secret:
-              secretName: gcp-secret
-        extraVolumeMounts:
-          - name: vault-gcs-sa
-            mountPath: /vault/sa
-            readOnly: true
+        extraEnvironmentVars:
+          GOOGLE_REGION: global
+          GOOGLE_PROJECT: myproject
+          GOOGLE_APPLICATION_CREDENTIALS: /vault/userconfig/myproject/myproject-creds.json
         server:
           standalone:
             enable: "-"
