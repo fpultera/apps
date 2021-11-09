@@ -30,7 +30,6 @@ spec:
               # }
               storage "gcs" {
                 bucket = "backup-vault-storage"
-                credentials = "/vault/userconfig/gcp-secret/quiet-era-330215-ac88592a8022.json"
               }
         # server:
         #   affinity: ""
