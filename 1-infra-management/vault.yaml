@@ -12,10 +12,17 @@ spec:
     helm:
       values: |
         server:
+          extraEnv:
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /vault/sa/key.json
           extraVolumes:
-            - type: secret
-              name: gcp-secret
-              path: null
+            - name: vault-gcs-sa
+              secret:
+                secretName: gcp-secret
+          extraVolumeMounts:
+            - name: vault-gcs-sa
+              mountPath: /vault/sa
+              readOnly: true
           standalone:
             enable: "-"
             config: |
@@ -30,7 +37,7 @@ spec:
               # }
               storage "gcs" {
                 bucket = "backup-vault-storage"
-                credentials = "/vault/userconfig/gcp-secret/quiet-era-330215-ac88592a8022.json"
+                credentials_file = "/vault/sa/key.json"
               }
         # server:
         #   affinity: ""
