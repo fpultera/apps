@@ -12,6 +12,9 @@ spec:
     helm:
       values: |
         server:
+          extraEnvironmentVars:
+            GOOGLE_CREDENTIALS: /vault/userconfig/gcp-secret/quiet-era-330215-ac88592a8022.json
+            GOOGLE_APPLICATION_CREDENTIALS: vault/userconfig/gcp-secret/quiet-era-330215-ac88592a8022.json
           extraVolumes:
             - type: secret
               name: gcp-secret
