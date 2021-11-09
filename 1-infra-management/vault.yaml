@@ -24,9 +24,8 @@ spec:
               # storage "file" {
               #   path = "/vault/data"
               # }
-              storage "consul" {
-                address = "127.0.0.1:8500"
-                path    = "vault"
+              storage "gcs" {
+                bucket = "backup-vault-storage"
               }
         # server:
         #   affinity: ""
