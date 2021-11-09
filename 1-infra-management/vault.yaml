@@ -11,19 +11,10 @@ spec:
     chart: vault
     helm:
       values: |
-        injector:
-          authPath: "auth/gcp"
-        server:
-          standalone:
-            config: |
-              }
-              storage "file" {
-                path = "/vault/data"
-              }
-        # server:
-        #   affinity: ""
-        #   ha:
-        #     enabled: true
+        ui: true
+        storage "file" {
+          path = "/vault/data"
+        }
   destination:
     server: https://kubernetes.default.svc
     namespace: vault
