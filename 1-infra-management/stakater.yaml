@@ -13,6 +13,7 @@ spec:
       values: |
         reloader:
           ignoreConfigMaps: true
+          ignoreNamespaces: "devops-apps"
   destination:
     server: https://kubernetes.default.svc
     namespace: stakater
