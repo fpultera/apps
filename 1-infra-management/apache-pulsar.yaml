@@ -20,7 +20,7 @@ spec:
         initialize: true
         monitoring:
           # monitoring - prometheus
-          prometheus: false
+          prometheus: true
           # monitoring - grafana
           grafana: false
           # monitoring - node_exporter
