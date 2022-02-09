@@ -1,0 +1,80 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: apache-pulsar-dev
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://pulsar.apache.org/charts'
+    targetRevision: 2.7.5
+    chart: pulsar
+    helm: 
+      values: |
+        pulsar_manager:
+          service:
+            type: ClusterIP
+        proxy:
+          service:
+            type: ClusterIP
+        initialize: true
+        monitoring:
+          # monitoring - prometheus
+          prometheus: false
+          # monitoring - grafana
+          grafana: false
+          # monitoring - node_exporter
+          node_exporter: false
+          # alerting - alert-manager
+          alert_manager: false
+        zookeper:
+          nodeSelector:
+            nodetype: main
+          tolerations:
+            - key: dedicated
+              operator: Equal
+              value: main
+              effect: NoSchedule        
+        bookkeeper:
+          nodeSelector:
+            nodetype: main
+          tolerations:
+            - key: dedicated
+              operator: Equal
+              value: main
+              effect: NoSchedule
+        autorecovery:
+          nodeSelector:
+            nodetype: main
+          tolerations:
+            - key: dedicated
+              operator: Equal
+              value: main
+              effect: NoSchedule
+        broker:
+          annotations:
+            sidecar.istio.io/inject: "true"
+          configData:
+            webSocketServiceEnabled: "true"
+          nodeSelector:
+            nodetype: main
+          tolerations:
+            - key: dedicated
+              operator: Equal
+              value: main
+              effect: NoSchedule
+        toolset:
+          nodeSelector:
+            nodetype: main
+          tolerations:
+            - key: dedicated
+              operator: Equal
+              value: main
+              effect: NoSchedule
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: pulsar
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
