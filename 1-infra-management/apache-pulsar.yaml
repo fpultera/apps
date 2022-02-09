@@ -20,7 +20,7 @@ spec:
         initialize: true
         monitoring:
           # monitoring - prometheus
-          prometheus: true
+          prometheus: false
           # monitoring - grafana
           grafana: false
           # monitoring - node_exporter
@@ -52,6 +52,10 @@ spec:
               value: main
               effect: NoSchedule
         broker:
+          podMonitor:
+            enabled: false
+            interval: 10s
+            scrapeTimeout: 10s
           annotations:
             sidecar.istio.io/inject: "true"
           configData:
