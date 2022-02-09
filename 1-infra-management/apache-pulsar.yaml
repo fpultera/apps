@@ -53,7 +53,7 @@ spec:
               effect: NoSchedule
         broker:
           podMonitor:
-            enabled: false
+            enabled: true
             interval: 10s
             scrapeTimeout: 10s
           annotations:
