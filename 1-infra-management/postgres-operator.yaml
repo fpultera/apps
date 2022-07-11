@@ -2,11 +2,21 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: postgres-operator-dev
+  namespace: argocd
 spec:
+  project: default
   source:
     repoURL: https://github.com:movetokube/postgres-operator.git             
     targetRevision: master
     path: deploy
-
     kustomize:
       version: v3.5.4
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: stakater
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
