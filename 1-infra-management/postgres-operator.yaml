@@ -9,8 +9,6 @@ spec:
     repoURL: https://github.com/movetokube/postgres-operator.git             
     targetRevision: master
     path: deploy
-    kustomize:
-      version: v4.4.0
   destination:
     server: https://kubernetes.default.svc
     namespace: stakater
