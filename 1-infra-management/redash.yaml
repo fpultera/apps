@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://getredash.github.io/contrib-helm-chart/
     targetRevision: 3.0.0
-    chart: redash/redash
+    chart: redash
   destination:
     server: https://kubernetes.default.svc
     namespace: redash
