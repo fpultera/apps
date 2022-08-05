@@ -1,0 +1,12 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app
+spec:
+  source:
+    repoURL: 'https://github.com/fpultera/apps.git'
+    targetRevision: main
+    path: app-kustomize/overlays/dev
+
+    kustomize:
+      version: v3.5.4

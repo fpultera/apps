@@ -1,0 +1,14 @@
+resources:
+- deployment.yaml
+- service.yaml
+
+commonLabels:
+  owner: devops
+  app: cuca-app
+  env: base
+
+namespace: cuca-namespace
+
+images:
+- name: nginx
+  newTag: v1

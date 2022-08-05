@@ -1,0 +1,9 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: web-cuca
+  role: deployment
+  $patch: replace
+spec:
+  replicas: 30
