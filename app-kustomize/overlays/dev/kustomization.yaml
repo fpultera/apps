@@ -1,11 +1,15 @@
 namePrefix: dev-
+
 commonLabels:
   variant: dev
   org: acmeCorporation
+
 commonAnnotations:
   note: Hello, I am dev!
+
 resources:
 - ../../base
+
 patchesStrategicMerge:
 - map.yaml
 - deployment.yaml
