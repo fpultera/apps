@@ -2,17 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web-cuca
-  labels:
-    role: web-cuca
 spec:
   replicas: 1
   selector:
-    matchLabels:
-      role: web-cuca
-  template:
-    metadata:
-      labels:
-        role: web-cuca
     spec:
       containers:
       - name: web-cuca

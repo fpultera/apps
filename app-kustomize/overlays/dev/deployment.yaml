@@ -3,6 +3,5 @@ kind: Deployment
 
 metadata:
   name: web-cuca
-  role: deployment
 spec:
   replicas: 30
