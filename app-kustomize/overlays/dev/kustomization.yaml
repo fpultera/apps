@@ -1,6 +1,6 @@
-namePrefix: staging-
+namePrefix: dev-
 commonLabels:
-  variant: staging
+  variant: dev
   org: acmeCorporation
 commonAnnotations:
   note: Hello, I am dev!
