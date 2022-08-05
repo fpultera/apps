@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: the-map
 data:
-  altGreeting: "Have a prd env"
+  altGreeting: "Have a stg env"
   enableRisky: "true"
