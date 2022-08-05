@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
+
 metadata:
   name: web-cuca
 spec:
   replicas: 1
-  selector:
-    spec:
-      containers:
-      - name: web-cuca
-        image: nginx
+  spec:
+    containers:
+    - name: web-cuca
+      image: nginx
