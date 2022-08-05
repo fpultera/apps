@@ -1,0 +1,17 @@
+namePrefix: stg-
+
+commonLabels:
+  variant: stg
+  org: acmeCorporation
+
+commonAnnotations:
+  note: Hello, I am stg!
+  app-name: app-hello
+
+resources:
+- ../../base
+
+patchesStrategicMerge:
+- map.yaml
+- deployment.yaml
+- service.yaml
