@@ -6,6 +6,7 @@ commonLabels:
 
 commonAnnotations:
   note: Hello, I am dev!
+  app-name: app-hello
 
 resources:
 - ../../base
