@@ -3,5 +3,5 @@ kind: Deployment
 
 metadata:
   name: web-cuca
-spec:
-  replicas: 30
+  spec:
+    replicas: 30

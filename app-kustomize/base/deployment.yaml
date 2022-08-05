@@ -3,9 +3,9 @@ kind: Deployment
 
 metadata:
   name: web-cuca
-spec:
-  replicas: 1
   spec:
-    containers:
-    - name: web-cuca
-      image: nginx
+    replicas: 1
+    spec:
+      containers:
+      - name: web-cuca
+        image: nginx
