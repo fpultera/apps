@@ -1,0 +1,27 @@
+provider: google # Use Google Cloud DNS provider
+
+google:
+  project: YOUR_GCP_PROJECT_ID # Replace with your Google Cloud Project ID
+  serviceAccountSecret: external-dns-google-sa # Secret containing the service account key for GCP
+  serviceAccountKey: | # Reference the Secret data containing the service account key
+    {
+      "name": "external-dns-google-sa",
+      "key": "credentials.json"
+    }
+  zones:
+    - YOUR_DNS_ZONE_NAME # Replace with the DNS zone managed by Google Cloud DNS
+
+interval: 1m # Frequency to check for changes in resources
+
+logLevel: info # Set log level (options: debug, info, warning, error)
+
+policy: sync # Set to 'sync' to create and update DNS records automatically
+
+txtOwnerId: external-dns # TXT record owner ID (arbitrary identifier)
+
+sources:
+  - ingress # Monitor Kubernetes Ingress resources for DNS records
+  - service # Monitor Kubernetes Services of type 'LoadBalancer' for DNS records
+
+rbac:
+  create: true # Set to 'true' to create RBAC resources
